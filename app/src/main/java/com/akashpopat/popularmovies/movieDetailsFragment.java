@@ -1,6 +1,7 @@
 package com.akashpopat.popularmovies;
 
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -55,10 +56,17 @@ public class movieDetailsFragment extends Fragment {
     LinearLayout reviewsView;
     Movie mMovie;
     private ShareActionProvider mShareActionProvider;
+    Context mContext;
 
 
     public movieDetailsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
 
     @Override
@@ -306,7 +314,7 @@ public class movieDetailsFragment extends Fragment {
 
     private void setReviewsUI(List<Review> reviewsList) {
         reviewsView.removeAllViews();
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater =((Activity)mContext).getLayoutInflater();
 
         for(Review review : reviewsList){
             ViewGroup reviewContainer = (ViewGroup) inflater.inflate(R.layout.review_item,reviewsView,false);
